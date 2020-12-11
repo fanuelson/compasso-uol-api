@@ -2,6 +2,7 @@ package com.compasso.uol.config;
 
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.jdbi.v3.stringtemplate4.StringTemplateEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +15,7 @@ public class JdbiConfiguration {
     public Jdbi jdbi(DataSource dataSource){
         Jdbi jdbi = Jdbi.create(dataSource);
         jdbi.installPlugin(new SqlObjectPlugin());
-
+        jdbi.setTemplateEngine(new StringTemplateEngine());
         return jdbi;
     }
 }

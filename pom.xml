@@ -55,6 +55,13 @@
 			<version>${jdbi.version}</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.jdbi</groupId>
+			<artifactId>jdbi3-stringtemplate4</artifactId>
+			<version>${jdbi.version}</version>
+		</dependency>
+
 		<!-- flyway migration -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>

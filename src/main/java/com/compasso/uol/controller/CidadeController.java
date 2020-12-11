@@ -1,10 +1,13 @@
 package com.compasso.uol.controller;
 
+import com.compasso.uol.dtos.CidadeFiltroDTO;
 import com.compasso.uol.model.Cidade;
 import com.compasso.uol.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cidades")
@@ -23,4 +26,8 @@ public class CidadeController {
         return cidadeService.criar(cidade);
     }
 
+    @GetMapping
+    public List<Cidade> find(CidadeFiltroDTO cidadeFiltroDTO) {
+        return cidadeService.find(cidadeFiltroDTO);
+    }
 }
