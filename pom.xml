@@ -54,6 +54,12 @@
 			<artifactId>jdbi3-sqlobject</artifactId>
 			<version>${jdbi.version}</version>
 		</dependency>
+
+		<!-- flyway migration -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 		
 		<!-- Swagger-->
         <dependency>
@@ -81,6 +87,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
 	</build>
 
