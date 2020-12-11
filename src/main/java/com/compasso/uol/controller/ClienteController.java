@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteController {
@@ -23,4 +25,8 @@ public class ClienteController {
         return clienteService.criar(cliente);
     }
 
+    @GetMapping
+    public List<Cliente> find(String nome) {
+        return clienteService.find(nome);
+    }
 }

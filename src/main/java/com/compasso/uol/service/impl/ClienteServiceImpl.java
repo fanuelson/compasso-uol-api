@@ -6,6 +6,8 @@ import com.compasso.uol.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
@@ -21,5 +23,10 @@ public class ClienteServiceImpl implements ClienteService {
         Long idCriado = clienteDAO.criar(cliente);
         cliente.setId(idCriado);
         return cliente;
+    }
+
+    @Override
+    public List<Cliente> find(String nome) {
+        return clienteDAO.find(nome);
     }
 }
