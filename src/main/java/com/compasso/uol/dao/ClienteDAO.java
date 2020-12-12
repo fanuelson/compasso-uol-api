@@ -35,4 +35,6 @@ public interface ClienteDAO {
     @SqlUpdate("delete from cliente where id = ?")
     boolean delete(Long id);
 
+    @SqlUpdate("update cliente set nomeCompleto = :nomeCompleto where id = :clienteId")
+    boolean updateCliente(@Bind Long clienteId, @BindBean Cliente cliente);
 }

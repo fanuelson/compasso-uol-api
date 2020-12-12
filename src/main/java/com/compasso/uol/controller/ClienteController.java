@@ -1,5 +1,6 @@
 package com.compasso.uol.controller;
 
+import com.compasso.uol.dtos.ClienteChangeNameRequest;
 import com.compasso.uol.model.Cliente;
 import com.compasso.uol.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,11 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         clienteService.delete(id);
+    }
+
+    @PatchMapping("/{id}")
+    public String changeNomeCompleto(@PathVariable  Long id, @RequestBody ClienteChangeNameRequest clienteChangeNameRequest) {
+        Cliente cliente = clienteService.updateNomeCompleto(id, clienteChangeNameRequest);
+        return cliente.getNomeCompleto();
     }
 }

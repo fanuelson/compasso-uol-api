@@ -1,6 +1,7 @@
 package com.compasso.uol.service;
 
 import com.compasso.uol.dao.ClienteDAO;
+import com.compasso.uol.dtos.ClienteChangeNameRequest;
 import com.compasso.uol.enums.SexoEnum;
 import com.compasso.uol.exceptions.ApiException;
 import com.compasso.uol.model.Cliente;
@@ -124,5 +125,30 @@ class ClienteServiceTest {
         when(clienteDAO.delete(Mockito.anyLong())).thenReturn(false);
 
         assertThrows(ApiException.class, () -> clienteServiceImpl.delete(1L));
+    }
+
+    @Test
+    void alterarNomeCliente_ClienteExiste() {
+        ClienteChangeNameRequest clienteChangeNameRequest = new ClienteChangeNameRequest();
+        clienteChangeNameRequest.setNomeCompleto("Nome novo");
+
+        Cliente cliente = getClientesSavedList().get(0);
+        when(clienteDAO.findById(Mockito.anyLong())).thenReturn(Optional.of(cliente));
+        when(clienteDAO.updateCliente(Mockito.anyLong(), Mockito.any())).thenReturn(true);
+
+        Cliente clienteUpdated = clienteServiceImpl.updateNomeCompleto(cliente.getId(), clienteChangeNameRequest);
+
+        assertEquals(clienteUpdated.getNomeCompleto(), clienteChangeNameRequest.getNomeCompleto());
+    }
+
+    @Test
+    void alterarNomeCliente_ClienteNaoExiste() {
+        ClienteChangeNameRequest clienteChangeNameRequest = new ClienteChangeNameRequest();
+        clienteChangeNameRequest.setNomeCompleto("Nome novo");
+
+        Cliente cliente = getClientesSavedList().get(0);
+        when(clienteDAO.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(ApiException.class, () -> clienteServiceImpl.updateNomeCompleto(cliente.getId(), clienteChangeNameRequest));
     }
 }

@@ -1,6 +1,7 @@
 package com.compasso.uol.service.impl;
 
 import com.compasso.uol.dao.ClienteDAO;
+import com.compasso.uol.dtos.ClienteChangeNameRequest;
 import com.compasso.uol.exceptions.ApiException;
 import com.compasso.uol.model.Cliente;
 import com.compasso.uol.service.ClienteService;
@@ -47,5 +48,13 @@ public class ClienteServiceImpl implements ClienteService {
             return true;
         }
         throw new ApiException("Cliente não encontrado", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Cliente updateNomeCompleto(Long id, @Valid ClienteChangeNameRequest clienteChangeNameRequest) {
+        Cliente cliente = findById(id);
+        cliente.setNomeCompleto(clienteChangeNameRequest.getNomeCompleto());
+        clienteDAO.updateCliente(cliente.getId(), cliente);
+        return cliente;
     }
 }
