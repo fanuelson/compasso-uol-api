@@ -1,4 +1,4 @@
-package com.compasso.uol.exceptions.handlers;
+package com.compasso.uol.exceptions;
 
 import org.springframework.http.HttpStatus;
 

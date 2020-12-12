@@ -28,4 +28,9 @@ public class CidadeServiceImpl implements CidadeService {
     public List<Cidade> find(CidadeFiltroDTO cidadeFiltroDTO) {
         return cidadeDAO.find(cidadeFiltroDTO);
     }
+
+    public Cidade findById(Long id) {
+        return cidadeDAO.findById(id)
+                .orElse(null);
+    }
 }

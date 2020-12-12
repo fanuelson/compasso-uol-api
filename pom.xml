@@ -62,6 +62,12 @@
 			<version>${jdbi.version}</version>
 		</dependency>
 
+		<!-- Spring Validation-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 		<!-- flyway migration -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>

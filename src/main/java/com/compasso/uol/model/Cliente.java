@@ -1,7 +1,9 @@
 package com.compasso.uol.model;
 
 import com.compasso.uol.enums.SexoEnum;
+import com.compasso.uol.validators.annotations.CityMustExists;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class Cliente {
@@ -18,6 +20,8 @@ public class Cliente {
 
     private Cidade cidade;
 
+    @NotNull(message = "{cliente.cidade.required}")
+    @CityMustExists
     private Long cidadeId;
 
     public Long getId() {

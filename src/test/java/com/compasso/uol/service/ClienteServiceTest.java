@@ -2,7 +2,7 @@ package com.compasso.uol.service;
 
 import com.compasso.uol.dao.ClienteDAO;
 import com.compasso.uol.enums.SexoEnum;
-import com.compasso.uol.exceptions.handlers.ApiException;
+import com.compasso.uol.exceptions.ApiException;
 import com.compasso.uol.model.Cliente;
 import com.compasso.uol.service.impl.ClienteServiceImpl;
 import org.junit.jupiter.api.Test;

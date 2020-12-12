@@ -10,4 +10,6 @@ public interface CidadeService {
     Cidade criar(Cidade cidade);
 
     List<Cidade> find(CidadeFiltroDTO cidadeFiltroDTO);
+
+    Cidade findById(Long id);
 }

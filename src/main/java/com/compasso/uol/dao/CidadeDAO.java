@@ -13,6 +13,7 @@ import org.jdbi.v3.sqlobject.transaction.Transaction;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RegisterBeanMapper(Cidade.class)
@@ -30,4 +31,6 @@ public interface CidadeDAO {
         @DefineNamedBindings
         List<Cidade> find(@BindBean CidadeFiltroDTO cidadeFiltroDTO);
 
+        @SqlQuery("select * from cidade where id = ?")
+        Optional<Cidade> findById(Long id);
 }
