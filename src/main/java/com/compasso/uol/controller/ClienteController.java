@@ -29,4 +29,9 @@ public class ClienteController {
     public List<Cliente> find(String nome) {
         return clienteService.find(nome);
     }
+
+    @GetMapping("/{id}")
+    public Cliente findById(@PathVariable Long id) {
+        return clienteService.findById(id);
+    }
 }

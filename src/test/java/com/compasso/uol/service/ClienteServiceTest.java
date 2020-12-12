@@ -2,6 +2,7 @@ package com.compasso.uol.service;
 
 import com.compasso.uol.dao.ClienteDAO;
 import com.compasso.uol.enums.SexoEnum;
+import com.compasso.uol.exceptions.handlers.ApiException;
 import com.compasso.uol.model.Cliente;
 import com.compasso.uol.service.impl.ClienteServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -84,5 +87,25 @@ public class ClienteServiceTest {
         List<Cliente> clientes = clienteServiceImpl.find("qualquer nome que não existe");
 
         assertEquals(0, clientes.size());
+    }
+
+    @Test
+    public void findClienteById_found() {
+        Cliente clienteSaved = getClientesSavedList().get(0);
+
+        when(clienteDAO.findById(clienteSaved.getId())).thenReturn(Optional.of(clienteSaved));
+
+        Cliente clienteEncontrado = clienteServiceImpl.findById(clienteSaved.getId());
+
+        assertEquals(clienteEncontrado.getId(), clienteSaved.getId());
+    }
+
+    @Test
+    public void findClienteById_notFound() {
+
+        when(clienteDAO.findById(Mockito.any())).thenReturn(Optional.empty());
+
+        assertThrows(ApiException.class, () -> clienteServiceImpl.findById(123L));
+
     }
 }

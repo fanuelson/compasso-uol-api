@@ -10,4 +10,6 @@ public interface ClienteService {
 
     List<Cliente> find(String nome);
 
+    Cliente findById(Long id);
+
 }

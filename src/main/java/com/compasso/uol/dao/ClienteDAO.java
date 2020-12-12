@@ -13,6 +13,7 @@ import org.jdbi.v3.sqlobject.transaction.Transaction;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RegisterBeanMapper(Cliente.class)
@@ -27,5 +28,8 @@ public interface ClienteDAO {
     @SqlQuery("select * from cliente <if(nome)> where nomeCompleto ilike '%' || :nome || '%' <endif> ")
     @AllowUnusedBindings
     List<Cliente> find(@Bind @Define String nome);
+
+    @SqlQuery("select * from cliente where id = ?")
+    Optional<Cliente> findById(Long id);
 
 }
