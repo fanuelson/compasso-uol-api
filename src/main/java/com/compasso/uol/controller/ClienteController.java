@@ -34,4 +34,9 @@ public class ClienteController {
     public Cliente findById(@PathVariable Long id) {
         return clienteService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        clienteService.delete(id);
+    }
 }

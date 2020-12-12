@@ -19,16 +19,19 @@ public class CidadeServiceImpl implements CidadeService {
         this.cidadeDAO = cidadeDAO;
     }
 
+    @Override
     public Cidade criar(Cidade cidade) {
         Long idCriado = cidadeDAO.criar(cidade);
         cidade.setId(idCriado);
         return cidade;
     }
 
+    @Override
     public List<Cidade> find(CidadeFiltroDTO cidadeFiltroDTO) {
         return cidadeDAO.find(cidadeFiltroDTO);
     }
 
+    @Override
     public Cidade findById(Long id) {
         return cidadeDAO.findById(id)
                 .orElse(null);

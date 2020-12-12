@@ -14,12 +14,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class CidadeServiceTest {
+class CidadeServiceTest {
 
     @Mock
     private CidadeDAO cidadeDAO;
@@ -49,7 +50,7 @@ public class CidadeServiceTest {
     }
 
     @Test
-    public void testSalvarCidade() {
+    void testSalvarCidade() {
 
         when(cidadeDAO.criar(Mockito.any())).thenReturn(1L);
 
@@ -60,7 +61,7 @@ public class CidadeServiceTest {
     }
 
     @Test
-    public void findCidades_foundResults() {
+    void findCidades_foundResults() {
         when(cidadeDAO.find(Mockito.any())).thenReturn(getCidadesSavedList());
 
         List<Cidade> cidades = cidadeServiceImpl.find(new CidadeFiltroDTO());
@@ -69,12 +70,30 @@ public class CidadeServiceTest {
     }
 
     @Test
-    public void findCidades_emptyResults() {
+    void findCidades_emptyResults() {
         when(cidadeDAO.find(Mockito.any())).thenReturn(Collections.emptyList());
 
         List<Cidade> cidades = cidadeServiceImpl.find(new CidadeFiltroDTO());
 
         assertEquals(0, cidades.size());
+    }
+
+    @Test
+    void findById_Found() {
+        Cidade cidade = getCidadesSavedList().get(0);
+
+        when(cidadeDAO.findById(Mockito.anyLong())).thenReturn(Optional.of(cidade));
+
+        Cidade cidadeEncontrada = cidadeServiceImpl.findById(1L);
+
+        assertNotNull(cidadeEncontrada);
+    }
+
+    @Test
+    void findById_NotFound() {
+        when(cidadeDAO.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        Cidade cidadeEncontrada = cidadeServiceImpl.findById(1L);
+        assertNull(cidadeEncontrada);
     }
 
 }

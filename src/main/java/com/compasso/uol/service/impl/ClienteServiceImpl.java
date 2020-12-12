@@ -39,4 +39,13 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteDAO.findById(id)
                 .orElseThrow(() -> new ApiException("Cliente não encontrado", HttpStatus.NOT_FOUND));
     }
+
+    @Override
+    public boolean delete(Long id) {
+        boolean deleted = clienteDAO.delete(id);
+        if (deleted) {
+            return true;
+        }
+        throw new ApiException("Cliente não encontrado", HttpStatus.NOT_FOUND);
+    }
 }

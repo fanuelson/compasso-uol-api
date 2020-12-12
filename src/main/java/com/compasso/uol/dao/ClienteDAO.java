@@ -32,4 +32,7 @@ public interface ClienteDAO {
     @SqlQuery("select * from cliente where id = ?")
     Optional<Cliente> findById(Long id);
 
+    @SqlUpdate("delete from cliente where id = ?")
+    boolean delete(Long id);
+
 }

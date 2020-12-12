@@ -17,12 +17,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ClienteServiceTest {
+class ClienteServiceTest {
 
     @Mock
     private ClienteDAO clienteDAO;
@@ -61,7 +61,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void testSalvarCliente() {
+    void testSalvarCliente() {
 
         when(clienteDAO.criar(Mockito.any())).thenReturn(1L);
 
@@ -72,7 +72,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void findClientes_foundResults() {
+    void findClientes_FoundResults() {
         when(clienteDAO.find(Mockito.any())).thenReturn(getClientesSavedList());
 
         List<Cliente> clientes = clienteServiceImpl.find("teste");
@@ -81,7 +81,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void findClientes_emptyResults() {
+    void findClientes_EmptyResults() {
         when(clienteDAO.find(Mockito.any())).thenReturn(Collections.emptyList());
 
         List<Cliente> clientes = clienteServiceImpl.find("qualquer nome que não existe");
@@ -90,7 +90,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void findClienteById_found() {
+    void findClienteById_Found() {
         Cliente clienteSaved = getClientesSavedList().get(0);
 
         when(clienteDAO.findById(clienteSaved.getId())).thenReturn(Optional.of(clienteSaved));
@@ -101,11 +101,28 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void findClienteById_notFound() {
+    void findClienteById_NotFound() {
 
         when(clienteDAO.findById(Mockito.any())).thenReturn(Optional.empty());
 
         assertThrows(ApiException.class, () -> clienteServiceImpl.findById(123L));
 
+    }
+
+    @Test
+    void deletarCliente_ClienteExiste() {
+
+        when(clienteDAO.delete(Mockito.anyLong())).thenReturn(true);
+        boolean deleted = clienteServiceImpl.delete(1L);
+
+        assertTrue(deleted);
+        verify(clienteDAO, Mockito.times(1)).delete(1L);
+    }
+
+    @Test
+    void deletarCliente_ClienteNaoExiste() {
+        when(clienteDAO.delete(Mockito.anyLong())).thenReturn(false);
+
+        assertThrows(ApiException.class, () -> clienteServiceImpl.delete(1L));
     }
 }

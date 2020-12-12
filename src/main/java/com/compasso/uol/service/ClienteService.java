@@ -13,4 +13,6 @@ public interface ClienteService {
 
     Cliente findById(Long id);
 
+    boolean delete(Long id);
+
 }
