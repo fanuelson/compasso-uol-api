@@ -5,6 +5,9 @@
 
 #### Swagger:
 https://compasso-uol-api.herokuapp.com/swagger-ui.html
+<hr>
 
+#### Postman Collection:
+https://www.getpostman.com/collections/a713db38aa2843126dcd
 
 
