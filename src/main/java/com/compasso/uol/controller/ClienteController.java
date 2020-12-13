@@ -41,7 +41,7 @@ public class ClienteController {
         clienteService.delete(id);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/nome-completo")
     public String changeNomeCompleto(@PathVariable  Long id, @RequestBody ClienteChangeNameRequest clienteChangeNameRequest) {
         Cliente cliente = clienteService.updateNomeCompleto(id, clienteChangeNameRequest);
         return cliente.getNomeCompleto();

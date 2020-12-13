@@ -22,7 +22,7 @@ public class CidadeController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public Cidade criar(@RequestBody Cidade cidade) {
+    public Cidade create(@RequestBody Cidade cidade) {
         return cidadeService.criar(cidade);
     }
 
